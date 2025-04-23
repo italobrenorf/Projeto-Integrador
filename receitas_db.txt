@@ -1,0 +1,101 @@
+DROP DATABASE IF EXISTS receitas_db;
+
+CREATE DATABASE receitas_db;
+
+USE receitas_db;
+
+CREATE TABLE alimentos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE receitas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    categoria VARCHAR(255),
+    cozinha VARCHAR(255),
+    instrucoes TEXT
+);
+
+CREATE TABLE ingredientes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_receita INT,
+    ingrediente VARCHAR(255),
+    quantidade VARCHAR(255),
+    FOREIGN KEY (id_receita) REFERENCES receitas(id)
+);
+
+INSERT INTO alimentos (nome) VALUES ('frango'), ('arroz'), ('abobrinha');
+
+INSERT INTO receitas (nome, categoria, cozinha, instrucoes) 
+VALUES ('Frango Grelhado', 'Prato Principal', 'Brasileira', '1. Tempere o frango com sal e azeite e deixe marinar por 15 minutos. 
+2. Aqueça uma frigideira em fogo médio e adicione um fio de azeite. 
+3. Coloque o frango na frigideira e grelhe por aproximadamente 5 minutos de cada lado, até dourar bem. 
+4. Sirva quente, acompanhado de salada ou arroz.'),
+
+('Sopa de Legumes', 'Sopa', 'Internacional', 
+'1. Em uma panela grande, aqueça o azeite e refogue a cebola e o alho até dourarem. 
+2. Adicione a cenoura, a batata e o caldo de legumes. 
+3. Deixe cozinhar por aproximadamente 20 minutos, até os legumes ficarem macios. 
+4. Tempere com sal e pimenta a gosto. 
+5. Sirva quente, acompanhado de torradas.'),
+
+('Macarrão ao Molho Pesto', 'Prato Principal', 'Italiana', 
+'1. Cozinhe o macarrão em água fervente com sal até ficar al dente. 
+2. No liquidificador, bata o manjericão, o queijo parmesão, as castanhas e o azeite até formar um molho homogêneo. 
+3. Escorra o macarrão e misture com o molho pesto. 
+4. Sirva imediatamente, polvilhado com mais queijo parmesão.'),
+
+('Omelete de Espinafre', 'Café da Manhã', 'Francesa', 
+'1. Bata os ovos em uma tigela e tempere com sal e pimenta. 
+2. Em uma frigideira, refogue o espinafre até murchar. 
+3. Adicione os ovos batidos e cozinhe em fogo baixo até firmar. 
+4. Dobre a omelete ao meio e sirva quente.'),
+
+('Salada de Quinoa', 'Entrada', 'Saudável', 
+'1. Cozinhe a quinoa conforme as instruções da embalagem e deixe esfriar. 
+2. Pique o tomate, o pepino e a cebola em cubos pequenos. 
+3. Misture tudo em uma tigela e tempere com azeite, suco de limão, sal e pimenta. 
+4. Sirva gelado.');
+
+INSERT INTO ingredientes (id_receita, ingrediente, quantidade)
+VALUES 
+
+-- Ingredientes para Frango Grelhado
+(1, 'Frango', '200g'), 
+(1, 'Sal', 'a gosto'), 
+(1, 'Azeite', '1 colher de sopa'),
+
+-- Ingredientes para Sopa de Legumes
+(2, 'Cenoura', '1 unidade'), 
+(2, 'Batata', '2 unidades'), 
+(2, 'Caldo de legumes', '500ml'), 
+(2, 'Cebola', '1 unidade'), 
+(2, 'Alho', '2 dentes'), 
+(2, 'Sal', 'a gosto'), 
+(2, 'Pimenta', 'a gosto'), 
+(2, 'Azeite', '1 colher de sopa'),
+
+-- Ingredientes para Macarrão ao Molho Pesto
+(3, 'Macarrão', '200g'), 
+(3, 'Manjericão', '1 maço'), 
+(3, 'Queijo parmesão', '50g'), 
+(3, 'Castanhas', '30g'), 
+(3, 'Azeite', '2 colheres de sopa'), 
+(3, 'Sal', 'a gosto'), 
+
+-- Ingredientes para Omelete de Espinafre
+(4, 'Ovos', '3 unidades'), 
+(4, 'Espinafre', '1 xícara'), 
+(4, 'Sal', 'a gosto'), 
+(4, 'Pimenta', 'a gosto'),
+
+-- Ingredientes para Salada de Quinoa
+(5, 'Quinoa', '1 xícara'), 
+(5, 'Tomate', '1 unidade'), 
+(5, 'Pepino', '1 unidade'), 
+(5, 'Cebola', '1/2 unidade'), 
+(5, 'Azeite', '2 colheres de sopa'), 
+(5, 'Limão', '1 unidade'), 
+(5, 'Sal', 'a gosto'), 
+(5, 'Pimenta', 'a gosto');
